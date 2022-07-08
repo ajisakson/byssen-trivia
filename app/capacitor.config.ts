@@ -3,7 +3,7 @@ import { CapacitorConfig } from "@capacitor/cli";
 const config: CapacitorConfig = {
 	appId: "com.byssen.trivia",
 	appName: "Byssen Trivia",
-	webDir: "build",
+	webDir: "../dist/client",
 	bundledWebRuntime: false
 };
 
