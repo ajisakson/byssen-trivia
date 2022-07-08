@@ -7,7 +7,7 @@ const cors = require("cors");
 const path = require("path");
 const port = process.env.PORT || 3333;
 
-const baseUrl = port === 3333 ? path.join(__dirname, "../dist/client") : "client";
+const baseUrl = port === 3333 ? path.join(__dirname, "../dist/client") : path.join(__dirname, "../../client");
 
 app.use(express.static(baseUrl));
 app.use(cors());
