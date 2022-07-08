@@ -23,5 +23,5 @@ app.get("*", (req: Request, res: Response) => {
 app.use("/countries", countryRoutes);
 
 app.listen(port, () => {
-	console.log(`Example app listening at http://localhost:${port}`);
+	console.log(`Listening at port ${port}`);
 });
