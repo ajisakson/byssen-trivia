@@ -1,16 +1,16 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types, Document, Date } from "mongoose";
 
-interface IUser {
-	username?: string;
+interface IUser extends Document {
 	email: string;
 	password: string;
 	roles: [
 		{
 			type: Schema.Types.ObjectId;
-			ref: "role";
+			ref: "Role";
 		}
 	];
-	joined: string;
+	joined: Date;
+	username?: string;
 	firstname?: string;
 	lastname?: string;
 	birthday?: string;
@@ -26,8 +26,8 @@ interface IUser {
 const UserSchema = new Schema<IUser>({
 	email: { type: String, unique: true, required: true },
 	password: { type: String, required: true },
-	roles: [{ type: Schema.Types.ObjectId, ref: "role" }],
-	joined: { type: String, required: true },
+	roles: [{ type: Schema.Types.ObjectId, ref: "Role" }],
+	joined: { type: Date, required: true },
 	username: { type: String, unique: true },
 	firstname: String,
 	lastname: String,

@@ -9,4 +9,9 @@
 	background-color: #282c34;
 	color: white;
 	font-family: "Monaco";
+	#register-form,
+	#login-form {
+		display: flex;
+		flex-direction: column;
+	}
 }

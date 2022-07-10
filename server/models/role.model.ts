@@ -1,6 +1,6 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types, Document } from "mongoose";
 
-interface IRole {
+interface IRole extends Document {
 	name: string;
 }
 

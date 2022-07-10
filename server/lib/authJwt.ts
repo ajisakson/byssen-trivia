@@ -1,8 +1,15 @@
 import { secret } from "../lib/auth.config";
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { Role } from "../models/role.model";
+
+const catchError = (err: JsonWebTokenError, res: Response) => {
+	if (err instanceof TokenExpiredError) {
+		return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
+	}
+	return res.sendStatus(401).send({ message: "Unauthorized!" });
+};
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 	// @ts-ignore
 	let token = req.headers["x-access-token"];
@@ -10,9 +17,9 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 		return res.status(403).send({ message: "No token provided!" });
 	}
 	// @ts-ignore
-	jwt.verify(token, secret, (err: any, decoded: any) => {
+	jwt.verify(token, secret, (err: JsonWebTokenError, decoded: any) => {
 		if (err) {
-			return res.status(401).send({ message: "Unauthorized!" });
+			return catchError(err, res);
 		}
 		// @ts-ignore
 		req.userId = decoded.id;

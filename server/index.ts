@@ -1,5 +1,9 @@
 import "./lib/db.config";
 import express, { application, Request, Response } from "express";
+import { User } from "./models/user.model";
+import { Role } from "./models/role.model";
+import { RefreshToken } from "./models/refreshtoken.model";
+
 import { authRouter } from "./routes/auth.routes";
 import { userRouter } from "./routes/user.routes";
 import cors from "cors";
