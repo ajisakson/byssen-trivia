@@ -14,11 +14,13 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 		if (err) {
 			return res.status(401).send({ message: "Unauthorized!" });
 		}
+		// @ts-ignore
 		req.userId = decoded.id;
 		next();
 	});
 };
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+	// @ts-ignore
 	User.findById(req.userId).exec((err: any, user: typeof User) => {
 		if (err) {
 			res.status(500).send({ message: err });
@@ -46,6 +48,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 	});
 };
 const isModerator = (req: Request, res: Response, next: NextFunction) => {
+	// @ts-ignore
 	User.findById(req.userId).exec((err: any, user: typeof User) => {
 		if (err) {
 			res.status(500).send({ message: err });
