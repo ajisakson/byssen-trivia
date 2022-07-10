@@ -1,17 +1,14 @@
-.App {
-	height: 100vh;
-	width: 100vw;
+#login-panel {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background-color: #282c34;
 	color: white;
 	font-family: "Monaco";
-	#register-form,
 	#login-form {
 		display: flex;
 		flex-direction: column;
+		row-gap: 8px;
 	}
 }

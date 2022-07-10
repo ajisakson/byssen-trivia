@@ -1,0 +1,14 @@
+#register-panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+	font-family: "Monaco";
+	#register-form {
+		display: flex;
+		flex-direction: column;
+		row-gap: 8px;
+	}
+}
