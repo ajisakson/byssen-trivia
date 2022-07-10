@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
+import { User } from "../models/user.model";
+import { ROLES } from "../models/role.model";
 
-const db = require("../models");
-const ROLES = db.ROLES;
-const User = db.User;
 const checkDuplicateUsernameOrEmail = (req: Request, res: Response, next: NextFunction) => {
 	// Username
 	User.findOne({
@@ -45,8 +44,4 @@ const checkRolesExisted = (req: Request, res: Response, next: NextFunction) => {
 	}
 	next();
 };
-const verifyRegistration = {
-	checkDuplicateUsernameOrEmail,
-	checkRolesExisted
-};
-module.exports = verifyRegistration;
+export { checkDuplicateUsernameOrEmail, checkRolesExisted };

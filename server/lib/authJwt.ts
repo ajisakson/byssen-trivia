@@ -1,16 +1,16 @@
+import { secret } from "../lib/auth.config";
 import { Request, Response, NextFunction } from "express";
-
-const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
-const db = require("../models");
-const User = db.user;
-const Role = db.role;
+import jwt from "jsonwebtoken";
+import { User } from "../models/user.model";
+import { Role } from "../models/role.model";
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+	// @ts-ignore
 	let token = req.headers["x-access-token"];
 	if (!token) {
 		return res.status(403).send({ message: "No token provided!" });
 	}
-	jwt.verify(token, config.secret, (err: any, decoded: any) => {
+	// @ts-ignore
+	jwt.verify(token, secret, (err: any, decoded: any) => {
 		if (err) {
 			return res.status(401).send({ message: "Unauthorized!" });
 		}
@@ -21,7 +21,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 };
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 	// @ts-ignore
-	User.findById(req.userId).exec((err: any, user: typeof User) => {
+	User.findById(req.userId).exec((err: any, user: User) => {
 		if (err) {
 			res.status(500).send({ message: err });
 			return;
@@ -30,7 +30,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 			{
 				_id: { $in: user.roles }
 			},
-			(err: any, roles: typeof Role) => {
+			(err: any, roles: Array<typeof Role>) => {
 				if (err) {
 					res.status(500).send({ message: err });
 					return;
@@ -49,7 +49,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 };
 const isModerator = (req: Request, res: Response, next: NextFunction) => {
 	// @ts-ignore
-	User.findById(req.userId).exec((err: any, user: typeof User) => {
+	User.findById(req.userId).exec((err: any, user: User) => {
 		if (err) {
 			res.status(500).send({ message: err });
 			return;
@@ -58,7 +58,7 @@ const isModerator = (req: Request, res: Response, next: NextFunction) => {
 			{
 				_id: { $in: user.roles }
 			},
-			(err: any, roles: typeof Role) => {
+			(err: any, roles: Array<typeof Role>) => {
 				if (err) {
 					res.status(500).send({ message: err });
 					return;
@@ -75,9 +75,4 @@ const isModerator = (req: Request, res: Response, next: NextFunction) => {
 		);
 	});
 };
-const authJwt = {
-	verifyToken,
-	isAdmin,
-	isModerator
-};
-module.exports = authJwt;
+export { verifyToken, isAdmin, isModerator };

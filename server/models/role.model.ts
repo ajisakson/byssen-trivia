@@ -4,6 +4,8 @@ interface IRole {
 	name: string;
 }
 
+const ROLES = ["user", "moderator", "admin"];
+
 const RoleSchema = new Schema<IRole>({
 	name: {
 		type: String
@@ -12,4 +14,4 @@ const RoleSchema = new Schema<IRole>({
 
 const Role = model<IRole>("Role", RoleSchema);
 
-export { Role, IRole };
+export { ROLES, Role, IRole };

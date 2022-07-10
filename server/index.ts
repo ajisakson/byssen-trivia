@@ -1,13 +1,12 @@
 import "./lib/db.config";
-import express, { Request, Response } from "express";
-import countryRoutes from "./routes/country.routes";
-import authRoutes from "./routes/auth.routes";
+import express, { application, Request, Response } from "express";
+import { authRouter } from "./routes/auth.routes";
+import { userRouter } from "./routes/user.routes";
+import cors from "cors";
+import path from "path";
 
 const app = express();
-const cors = require("cors");
-const path = require("path");
 const port = process.env.PORT || 3333;
-
 const baseUrl = port === 3333 ? path.join(__dirname, "../dist/client") : path.join(__dirname, "client");
 
 app.use(express.static(baseUrl));
@@ -17,13 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.raw({ type: "application/vnd.custom-type" }));
 app.use(express.text({ type: "text/html" }));
 
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+
 app.get("/api", (req: Request, res: Response) => {
 	res.send(true);
 });
-
-app.use("/api/countries", countryRoutes);
-// app.use("/api/auth/register", authRoutes);
-// app.use("/api/auth/login", authRoutes);
 
 app.get("*", (req: Request, res: Response) => {
 	res.sendFile(path.join(baseUrl, "/index.html"));

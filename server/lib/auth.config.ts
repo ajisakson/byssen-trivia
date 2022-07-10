@@ -1,3 +1,3 @@
-module.exports = {
-	secret: process.env.AUTH_SECRET_KEY
-};
+const secret = process.env.AUTH_SECRET_KEY;
+
+export { secret };
