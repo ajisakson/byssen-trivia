@@ -72,11 +72,11 @@ const signin = (req: Request, res: Response) => {
 				return;
 			}
 			if (!user) {
-				return res.status(404).send({ message: "User Not found." });
+				return res.status(401).send({ message: "User Not found." });
 			}
 			var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 			if (!passwordIsValid) {
-				return res.status(401).send({
+				return res.status(402).send({
 					accessToken: null,
 					message: "Invalid Password!"
 				});
