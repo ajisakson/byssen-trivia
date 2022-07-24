@@ -4,20 +4,20 @@ import { IUser } from "../models/User";
 
 const curAccessToken = () => {
 	let user = localStorage.getItem("User") || "{}";
-	user = JSON.parse(user);
-	if (user && user.accessToken) {
-		return user.accessToken;
+	let userObj: IUser = JSON.parse(user);
+	if (userObj && userObj.accessToken) {
+		return userObj.accessToken;
 	}
-	return null;
+	return false;
 };
 
 const curRefreshToken = () => {
 	let user = localStorage.getItem("User") || "{}";
-	user = JSON.parse(user);
-	if (user && user.refreshToken) {
-		return user.refreshToken;
+	let userObj = JSON.parse(user);
+	if (userObj && userObj.refreshToken) {
+		return userObj.refreshToken;
 	}
-	return null;
+	return false;
 };
 
 // > create axios instance with access token and base url
@@ -41,10 +41,10 @@ export const refreshToken = async () => {
 	);
 
 	let aUser = localStorage.getItem("User") || "{}";
-	aUser = JSON.parse(aUser);
-	aUser.accessToken = resAccessToken ?? "";
+	let aUserObj = JSON.parse(aUser);
+	aUserObj.accessToken = resAccessToken ?? "";
 
-	localStorage.setItem("User", JSON.stringify(aUser));
+	localStorage.setItem("User", JSON.stringify(aUserObj));
 
 	return user;
 };

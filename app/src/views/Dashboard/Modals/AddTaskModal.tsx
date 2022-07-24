@@ -27,7 +27,7 @@ export default function AddTaskModal({ data }: any) {
 			name: taskName,
 			description: taskDescription,
 			due_date: taskDueDate,
-			userid: appUser.id
+			userid: appUser?.id
 		};
 		try {
 			byssenApiClient.post("task", payload);

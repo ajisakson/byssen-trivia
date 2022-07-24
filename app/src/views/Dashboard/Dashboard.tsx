@@ -44,9 +44,9 @@ function Dashboard() {
 	useEffect(() => {
 		if (!appUser?.id) return;
 		const fetchData = async () => {
-			const tasksRes = await byssenApiClient.get("task", { userid: appUser.id });
+			const tasksRes = await byssenApiClient.get("task");
 			setTasks(tasksRes.data);
-			const notesRes = await byssenApiClient.get("note", { userid: appUser.id });
+			const notesRes = await byssenApiClient.get("note");
 			setNotes(notesRes.data);
 		};
 		fetchData();

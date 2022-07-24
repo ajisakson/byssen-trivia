@@ -5,4 +5,6 @@ export interface IUser {
 	lastname?: String;
 	username?: String;
 	image?: String;
+	accessToken: string | number | boolean;
+	refreshToken: string | boolean;
 }

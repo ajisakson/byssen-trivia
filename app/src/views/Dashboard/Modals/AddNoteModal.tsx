@@ -29,7 +29,7 @@ export default function AddNoteModal({ data }: any) {
 		const payload = {
 			name: noteName,
 			content: noteMD,
-			userid: appUser.id
+			userid: appUser?.id
 		};
 		try {
 			byssenApiClient.post("note", payload).then((result) => {

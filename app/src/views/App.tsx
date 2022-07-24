@@ -18,8 +18,8 @@ function App() {
 
 	useEffect(() => {
 		let storedUser = localStorage.getItem("User") || "{}";
-		storedUser = JSON.parse(storedUser);
-		setUser(storedUser);
+		let storedUserObj: IUser = JSON.parse(storedUser);
+		setUser(storedUserObj);
 	}, []);
 
 	return (
