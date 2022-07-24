@@ -1,0 +1,20 @@
+@import "../../colors";
+.view-note {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	.view-note-header {
+		font-size: 32px;
+		font-weight: 700;
+		padding: 1rem;
+		background-color: $darkmain;
+		border-radius: 4px;
+	}
+	.view-note-dates {
+		font-size: 16px;
+		font-weight: 700;
+		padding: 1rem;
+		background-color: $darkmain;
+		border-radius: 4px;
+	}
+}

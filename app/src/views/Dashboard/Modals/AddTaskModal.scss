@@ -1,0 +1,11 @@
+@import "../../colors";
+.add-task-modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.new-task {
+		background-color: $darkmain;
+		display: flex;
+		flex-direction: column;
+	}
+}

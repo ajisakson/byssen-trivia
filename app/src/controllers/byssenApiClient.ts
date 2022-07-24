@@ -1,32 +1,51 @@
 import type { AxiosError } from "axios";
 import axios from "axios";
-import { User } from "../models/User";
+import { IUser } from "../models/User";
 
-class TokenService {
-	accessToken = "";
-}
-export const tokenService = new TokenService();
+const curAccessToken = () => {
+	let user = localStorage.getItem("User") || "{}";
+	user = JSON.parse(user);
+	if (user && user.accessToken) {
+		return user.accessToken;
+	}
+	return null;
+};
+
+const curRefreshToken = () => {
+	let user = localStorage.getItem("User") || "{}";
+	user = JSON.parse(user);
+	if (user && user.refreshToken) {
+		return user.refreshToken;
+	}
+	return null;
+};
 
 // > create axios instance with access token and base url
 const byssenApiClient = axios.create({
 	baseURL: import.meta.env.VITE_BASE_URL || "/api",
 	headers: {
 		"Content-Type": "application/json",
-		"x-access-token": tokenService.accessToken
+		"x-access-token": curAccessToken()
 	}
 });
 
 export const refreshToken = async () => {
 	const {
 		data: { accessToken: resAccessToken, user }
-	} = await byssenApiClient.post<{ accessToken: string; user: User }>(
+	} = await byssenApiClient.post<{ accessToken: string; user: IUser }>(
 		"auth/refreshtoken",
-		{},
+		{ refreshToken: curRefreshToken() },
 		{
 			withCredentials: true
 		}
 	);
-	tokenService.accessToken = resAccessToken ?? "";
+
+	let aUser = localStorage.getItem("User") || "{}";
+	aUser = JSON.parse(aUser);
+	aUser.accessToken = resAccessToken ?? "";
+
+	localStorage.setItem("User", JSON.stringify(aUser));
+
 	return user;
 };
 
@@ -34,10 +53,10 @@ export const refreshToken = async () => {
 byssenApiClient.interceptors.request.use(
 	(config) => {
 		// > set access token in header
-		if (tokenService.accessToken) {
+		if (curAccessToken()) {
 			config.headers = {
 				...config.headers,
-				"x-access-token": tokenService.accessToken
+				"x-access-token": curAccessToken()
 			};
 		}
 		return config;

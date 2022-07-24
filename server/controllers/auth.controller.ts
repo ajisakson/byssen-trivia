@@ -76,7 +76,7 @@ const signin = (req: Request, res: Response) => {
 			}
 			var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 			if (!passwordIsValid) {
-				return res.status(402).send({
+				return res.status(401).send({
 					accessToken: null,
 					message: "Invalid Password!"
 				});

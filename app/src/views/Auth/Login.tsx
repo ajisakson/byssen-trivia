@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { login } from "../controllers/authHandlers";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../controllers/authHandlers";
+import { useAuth } from "../App";
 import "./Login.scss";
 
 export function Login() {
+	const { appUser, setUser } = useAuth();
 	const [emailInput, setEmailInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
+	let navigate = useNavigate();
 
 	const updateEmailInput = (e: React.FormEvent<HTMLInputElement>) => {
 		setEmailInput(e.currentTarget.value);
@@ -28,7 +31,9 @@ export function Login() {
 	const handleLogin = async () => {
 		if (!validate()) return;
 
-		login(emailInput, passwordInput);
+		const user = await login(emailInput, passwordInput);
+		setUser(user);
+		navigate("/");
 	};
 
 	return (

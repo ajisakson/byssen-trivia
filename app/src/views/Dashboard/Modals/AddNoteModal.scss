@@ -1,0 +1,42 @@
+@import "../../colors";
+
+.add-note {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	.add-note-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		column-gap: 16px;
+		#save-button {
+			all: unset;
+			color: white;
+			background-color: $darkmain;
+			font-size: 32px;
+			font-weight: 700;
+			padding: 16px;
+			border: none;
+			border-radius: 4px;
+			&:hover {
+				opacity: 0.9;
+			}
+			&:active {
+				opacity: 0.7;
+			}
+		}
+		#title-input {
+			color: white;
+			background-color: $darkmain;
+			border-radius: 4px;
+			padding: 16px;
+			font-size: 32px;
+			outline: none;
+			border: none;
+			flex-grow: 1;
+		}
+	}
+	.w-md-editor {
+		box-shadow: none !important;
+	}
+}

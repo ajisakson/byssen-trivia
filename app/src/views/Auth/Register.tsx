@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { register } from "../controllers/authHandlers";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../controllers/authHandlers";
 import "./Register.scss";
 
 export function Register() {
 	const [emailInput, setEmailInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
 	const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+	let navigate = useNavigate();
 
 	const updateEmailInput = (e: React.FormEvent<HTMLInputElement>) => {
 		setEmailInput(e.currentTarget.value);
@@ -39,7 +40,9 @@ export function Register() {
 	const handleRegister = () => {
 		if (!validate()) return;
 
-		register(emailInput, passwordInput);
+		register(emailInput, passwordInput).then(() => {
+			navigate("/");
+		});
 	};
 
 	return (

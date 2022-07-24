@@ -1,0 +1,31 @@
+@import "../../colors";
+
+.note {
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: $darkmain;
+	box-shadow: 0px 4px 8px 2px black;
+	color: white;
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.row-container {
+		.note-name {
+			font-weight: 700;
+		}
+		.updated-date {
+		}
+	}
+	.button-container {
+		display: flex;
+		flex-direction: column;
+		row-gap: 8px;
+		button {
+			all: unset;
+			color: white;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}

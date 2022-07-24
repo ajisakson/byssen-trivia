@@ -1,0 +1,39 @@
+@import "../../colors";
+.view-task {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	background-color: $darkmain;
+	border-right: 4px solid;
+	padding: 1rem;
+	.task-title {
+		padding: 1rem;
+		border-radius: 8px;
+		font-size: 32px;
+		font-weight: 700;
+		border-bottom: 1px solid $darksecond;
+	}
+	.task-contents {
+		border-radius: 8px;
+		font-size: 16px;
+		padding: 1rem;
+		.task-description {
+			margin-bottom: 16px;
+		}
+	}
+	&.Todo {
+		border-color: grey;
+	}
+	&.Active {
+		border-color: blue;
+	}
+	&.Delegated {
+		border-color: yellow;
+	}
+	&.Complete {
+		border-color: limegreen;
+	}
+	&.Cancelled {
+		border-color: maroon;
+	}
+}

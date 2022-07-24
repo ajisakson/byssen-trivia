@@ -1,0 +1,10 @@
+@import "../colors";
+.dashboard-page {
+	padding: 1rem;
+	overflow-y: scroll;
+
+	.main-ui {
+		display: flex;
+		column-gap: 16px;
+	}
+}

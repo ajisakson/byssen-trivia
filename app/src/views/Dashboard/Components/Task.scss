@@ -1,0 +1,62 @@
+@import "../../colors";
+
+.task {
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: $darkmain;
+	box-shadow: 0px 4px 8px 2px black;
+	color: white;
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-left: 4px solid;
+	column-gap: 1rem;
+	&.Todo {
+		border-color: grey;
+	}
+	&.Active {
+		border-color: blue;
+	}
+	&.Delegated {
+		border-color: yellow;
+	}
+	&.Complete {
+		border-color: limegreen;
+	}
+	&.Cancelled {
+		border-color: maroon;
+	}
+	.row-container {
+		display: flex;
+		flex-direction: column;
+		column-gap: 1rem;
+		justify-content: space-between;
+		row-gap: 8px;
+		width: 100%;
+		.task-info {
+			font-weight: 700;
+		}
+		.task-date-info {
+		}
+		select {
+			all: unset;
+			width: fit-content;
+			padding: 8px;
+			border: solid 1px white;
+			border-radius: 8px;
+			text-align: center;
+		}
+	}
+	.button-container {
+		display: flex;
+		flex-direction: column;
+		row-gap: 8px;
+		button {
+			all: unset;
+			color: white;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}

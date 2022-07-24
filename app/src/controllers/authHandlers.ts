@@ -1,3 +1,4 @@
+import { IUser } from "../models/User";
 import { byssenApiClient } from "./byssenApiClient";
 
 const register = async (email: String, password: String) => {
@@ -12,18 +13,24 @@ const register = async (email: String, password: String) => {
 };
 
 const login = async (email: String, password: String) => {
-	byssenApiClient
+	const result = await byssenApiClient
 		.post("auth/signin", {
 			email,
 			password
 		})
 		.then((e) => {
-			console.log(e);
-			return true;
+			localStorage.setItem("User", JSON.stringify(e.data));
+			return e.data;
+		})
+		.catch((e) => {
+			return {} as IUser;
 		});
-	return false;
+	return result;
 };
 
-const logout = () => {};
+const logout = () => {
+	localStorage.removeItem("User");
+	return {} as IUser;
+};
 
 export { login, register, logout };

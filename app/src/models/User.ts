@@ -1,4 +1,5 @@
-export interface User {
+export interface IUser {
+	id: String;
 	email: String;
 	firstname?: String;
 	lastname?: String;

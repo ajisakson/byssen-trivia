@@ -3,6 +3,9 @@ import express, { Request, Response } from "express";
 
 import { authRouter } from "./routes/auth.routes";
 import { userRouter } from "./routes/user.routes";
+import { noteRouter } from "./routes/note.routes";
+import { taskRouter } from "./routes/task.routes";
+
 import cors from "cors";
 import path from "path";
 
@@ -19,6 +22,8 @@ app.use(express.text({ type: "text/html" }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/note", noteRouter);
+app.use("/api/task", taskRouter);
 
 app.get("/api", (req: Request, res: Response) => {
 	res.send(true);
